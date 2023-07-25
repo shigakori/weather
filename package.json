@@ -1,5 +1,5 @@
 {
-  "name": "project",
+  "name": "todo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "sass": "^1.63.6",
+    "sass-loader": "^13.3.2",
     "vue": "^3.2.13"
   },
   "devDependencies": {

@@ -1,0 +1,41 @@
+:root {
+    --body: #fff;
+    --color: #49454F;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--body);
+    color: var(--color);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+button, input {
+    border: none;
+    outline: none;
+    background: none;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 12px;
+    max-width: 1152px;
+    width: 100%;
+}
