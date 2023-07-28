@@ -9,12 +9,29 @@
                     <span>{{ grid ? 'Список': 'Сетка' }}</span>
                 </button>
             </div>
+            <div class="notes__list" :class="{ active: !grid }">
+                <NotesCard 
+                :grid="grid"
+                v-for="item, index in notes" :key="item.id"
+                :note="item"
+                />
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import NotesCard from './Notes-Card.vue';
     export default {
+        components: {
+            NotesCard
+        },
+        props:{
+            notes: {
+                default: [],
+                type: Array
+            }
+        },
         data(){
             return {
                 grid: true
@@ -54,6 +71,17 @@
         font-weight: 500;
         line-height: 20px; /* 142.857% */
         letter-spacing: 0.1px;
+    }
+    
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 30px;
+        
+        &.active {
+            grid-template-columns: repeat(1, 1fr);
+        }
     }
 }
 </style>
