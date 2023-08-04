@@ -2,7 +2,7 @@
     <Transition name="modal">
     <div class="modal" @click="closeModal">
         <div class="modal__form" @click.stop="">
-            <h3 class="modal__title">Добавить заметку</h3>
+            <h3 class="modal__title">{{ edit ? words.titlewindowedit[lang] : words.titlewindow[lang]}}</h3>
             <div class="modal__content">
                 <label>
                     <span>Title</span>
@@ -14,8 +14,9 @@
                 </label>
             </div>
             <div class="modal__controls">
-                <button @click="closeModal" class="modal__btn modal__btn_red">Отмена</button>
-                <button @click="addNote" class="modal__btn">Добавить</button>
+                <button @click="closeModal" class="modal__btn modal__btn_red">{{ words.closebtn[lang] }}</button>
+                <button v-if="edit" @click="changeNote" class="modal__btn">{{ words.editwindowbtn[lang] }}</button>
+                <button v-else @click="addNote" class="modal__btn">{{ words.addbtn[lang] }}</button>
             </div>
         </div>
     </div>
@@ -25,18 +26,21 @@
 <script>
     export default {
         props: {
-            currentId: Number
+            currentId: Number,
+            editNote: Object,
+            edit: Boolean, 
+            lang: String
         },
         data(){
             return {
                 title: '',
                 desc: '',
-                id: this.currentId
+                id: this.currentId, 
             }
         },
         methods: {
             closeModal(){
-                this.$emit('closeModal')
+                this.$emit('closeModal');
             },
             addNote(){
                 let title = this.title.trim();
@@ -48,10 +52,40 @@
                         desc,
                         date: new Date().toLocaleDateString()
                     }
-                    console.log(item);
+                    this.closeModal()
+                    this.title = '';
+                    this.desc = '';
+                    this.$emit('addNote', item)
+                }
+            },
+            changeNote(){
+                let title = this.title.trim();
+                let desc = this.desc.trim();
+                if (title.length > 0 && desc.length > 0) {
+                    const item = {
+                        id: this.editNote.id,
+                        title,
+                        desc,
+                        date: new Date().toLocaleDateString()
+                    }
+                    this.closeModal()
+                    this.title = '';
+                    this.desc = '';
+                    this.$emit('editedNote', item)
                 }
             }
-        }
+        },
+        watch: {
+            edit(val){
+                if(val){
+                    this.title = this.editNote.title;
+                    this.desc = this.editNote.desc
+                } else {
+                    this.title = this.desc = '';
+                }
+            }
+        },
+        inject: ['words']
     }
 </script>
 
