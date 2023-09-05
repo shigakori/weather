@@ -1,0 +1,43 @@
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    
+    font-size: 25px;
+    color: #4793ff;
+    text-transform: uppercase;
+    font-weight: 700;
+    
+    &__img{
+        margin-right: 20px;
+    }
+}
+
+.search{
+    display: flex;
+    align-items: center;
+    
+    &__input {
+        padding: 9px 20px;
+        margin-left: 20px;
+        max-width: 194px;
+        width: 100%;
+        
+        background: rgba(71, 147, 255, 0.2);
+        border-radius: 10px;
+        
+        font-weight: 500;
+        
+        &::placeholder{
+            color: var(--color);
+        }
+    }
+}
